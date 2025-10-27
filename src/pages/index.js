@@ -17,8 +17,13 @@ export default function Home() {
           {lotteries.map((lottery) => (
             <div
               key={lottery.id}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden"
             >
+              <img
+                src={lottery.image}
+                alt={lottery.title}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-foreground">
                   {lottery.title}

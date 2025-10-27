@@ -7,6 +7,7 @@ export const lotteries = [
     maximumTickets: 5000,
     price: 50000,
     drawDate: "2024-12-15",
+    image: "https://global.toyota/pages/news/images/2020/06/17/1330/001.jpg",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const lotteries = [
     maximumTickets: 3000,
     price: 75000,
     drawDate: "2025-01-20",
+    image: "https://global.toyota/pages/news/images/2020/06/17/1330/001.jpg",
   },
   {
     id: 3,
@@ -25,5 +27,6 @@ export const lotteries = [
     maximumTickets: 10000,
     price: 60000,
     drawDate: "2024-12-30",
+    image: "https://global.toyota/pages/news/images/2020/06/17/1330/001.jpg",
   },
 ];
