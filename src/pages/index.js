@@ -1,107 +1,49 @@
-import { lotteries } from "@/mockdata";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2">Арвай авто худалдаа</h1>
-          <p className="text-lg opacity-90">View your lottery tickets here</p>
-        </div>
-      </header>
-      <main className="max-w-7xl mx-auto py-12 px-6">
-        <h2 className="text-3xl font-bold mb-8 text-foreground">
-          Available Lotteries
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {lotteries.map((lottery) => (
-            <div
-              key={lottery.id}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden"
+      <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-b from-blue-600/20 via-transparent to-purple-600/20" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+            Арвай Авто худалдаа
+          </h1>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+            <button
+              onClick={() => router.push("/lotteries")}
+              className="inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 font-semibold transition-colors w-full sm:w-auto"
             >
-              <img
-                src={lottery.image}
-                alt={lottery.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 text-foreground">
-                  {lottery.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {lottery.description}
-                </p>
+              Сугалаа үзэх
+            </button>
+            {/* <button
+              onClick={() => router.push("/cars")}
+              className="inline-flex items-center justify-center rounded-lg border border-foreground/20 hover:border-foreground/40 px-6 py-3 font-semibold transition-colors w-full sm:w-auto"
+            >
+              Машин үзэх
+            </button> */}
+          </div>
 
-                {/* Progress bar for sold tickets */}
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Tickets Sold:
-                    </span>
-                    <span className="font-semibold text-foreground">
-                      {lottery.maximumTickets - lottery.ticketsAvailable} /{" "}
-                      {lottery.maximumTickets}
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
-                      style={{
-                        width: `${
-                          ((lottery.maximumTickets - lottery.ticketsAvailable) /
-                            lottery.maximumTickets) *
-                          100
-                        }%`,
-                      }}
-                    ></div>
-                  </div>
-                  <div className="flex justify-between items-center mt-1">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {Math.round(
-                        ((lottery.maximumTickets - lottery.ticketsAvailable) /
-                          lottery.maximumTickets) *
-                          100
-                      )}
-                      % Sold
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {lottery.ticketsAvailable} Available
-                    </span>
-                  </div>
-                </div>
-
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Price:
-                    </span>
-                    <span className="font-semibold text-green-600">
-                      {lottery.price.toLocaleString()} ₮
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Draw Date:
-                    </span>
-                    <span className="font-semibold text-foreground">
-                      {lottery.drawDate}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      "https://docs.google.com/spreadsheets/d/1FABf3IhAO8-dzltS_OdNI-kh_shtDPqD2h0mgJNAp88/edit?gid=0#gid=0",
-                      "_blank"
-                    )
-                  }
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                >
-                  View Details
-                </button>
-              </div>
+          {/* <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+            <div className="rounded-xl border border-foreground/10 p-5 bg-white/60 dark:bg-black/30 backdrop-blur">
+              <h3 className="font-bold mb-1">Том шагнал</h3>
+              <p className="text-sm opacity-75">
+                Өндөр үнэтэй автомашинуудыг шангандаа бэлдсэн — шударга, ил тод
+                зарчим.
+              </p>
             </div>
-          ))}
+            <div className="rounded-xl border border-foreground/10 p-5 bg-white/60 dark:bg-black/30 backdrop-blur">
+              <h3 className="font-bold mb-1">Шууд худалдаа</h3>
+              <p className="text-sm opacity-75">
+                Баталгаатай шалгасан тээврийн хэрэгслүүд — бодит үнэ, тодорхой
+                мэдээлэл.
+              </p>
+            </div>
+          </div> */}
         </div>
       </main>
     </div>
