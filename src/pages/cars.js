@@ -145,7 +145,7 @@ export default function Cars() {
                 <button
                   onClick={() =>
                     window.open(
-                      "https://docs.google.com/spreadsheets/d/1FABf3IhAO8-dzltS_OdNI-kh_shtDPqD2h0mgJNAp88/edit?gid=0#gid=0",
+                      "https://www.facebook.com/arvai.autotrade",
                       "_blank"
                     )
                   }

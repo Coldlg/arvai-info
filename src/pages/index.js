@@ -20,12 +20,12 @@ export default function Home() {
             >
               Сугалаа үзэх
             </button>
-            {/* <button
+            <button
               onClick={() => router.push("/cars")}
               className="inline-flex items-center justify-center rounded-lg border border-foreground/20 hover:border-foreground/40 px-6 py-3 font-semibold transition-colors w-full sm:w-auto"
             >
               Машин үзэх
-            </button> */}
+            </button>
           </div>
 
           {/* <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
