@@ -28,22 +28,16 @@ export default function Home() {
             </button>
           </div>
 
-          {/* <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
             <div className="rounded-xl border border-foreground/10 p-5 bg-white/60 dark:bg-black/30 backdrop-blur">
-              <h3 className="font-bold mb-1">Том шагнал</h3>
+              <h3 className="font-bold mb-1">
+                Баталгаатай тээврийн хэрэгслүүд
+              </h3>
               <p className="text-sm opacity-75">
-                Өндөр үнэтэй автомашинуудыг шангандаа бэлдсэн — шударга, ил тод
-                зарчим.
+                бодит үнэ, тодорхой мэдээлэл.
               </p>
             </div>
-            <div className="rounded-xl border border-foreground/10 p-5 bg-white/60 dark:bg-black/30 backdrop-blur">
-              <h3 className="font-bold mb-1">Шууд худалдаа</h3>
-              <p className="text-sm opacity-75">
-                Баталгаатай шалгасан тээврийн хэрэгслүүд — бодит үнэ, тодорхой
-                мэдээлэл.
-              </p>
-            </div>
-          </div> */}
+          </div>
         </div>
       </main>
     </div>

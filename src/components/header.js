@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function Header() {
   return (
-    <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-1">
       <h1 className="text-2xl md:text-4xl font-bold">Арвай авто худалдаа</h1>
       <Link
         href="/"
