@@ -22,7 +22,7 @@ export default function Lotteries({ lotteries }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const lotteries = await prisma.lottery.findMany();
 
   // Serialize dates to strings (JSON)
@@ -35,5 +35,6 @@ export async function getServerSideProps() {
     props: {
       lotteries: serializedLotteries,
     },
+    revalidate: 10,
   };
 }
