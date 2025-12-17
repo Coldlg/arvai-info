@@ -20,6 +20,16 @@ export function LotteryCard({ lottery }) {
     }
   };
 
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("Данс хуулсан!");
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+      alert("Данс хуулсангүй!");
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden relative">
       <div className="relative">
@@ -91,7 +101,20 @@ export function LotteryCard({ lottery }) {
           </div>
         </div>
         <div className="my-4">
-          <div className="text-md text-gray-300 ">{lottery.description}</div>
+          <div className="text-md text-gray-300 whitespace-pre-line">{lottery.description}</div>
+          {lottery.accountNumber && (
+            <div className="mt-2 text-gray-300">
+              ❌ Данс:{" "}
+              <span className="cursor-pointer underline text-blue-400" onClick={() => copyText(lottery.accountNumber)}>
+                {lottery.accountNumber}
+              </span>
+              <br />
+              {lottery.bankName && lottery.accountName && `(${lottery.bankName} ${lottery.accountName})`}
+              <br />❌ Нэг сугалааны эрх{" "}
+              <span className="font-semibold text-green-600">{lottery.price.toLocaleString()}₮</span>
+              <br />❌ Гүйлгээний утга: Утасны дугаар
+            </div>
+          )}
         </div>
 
         <button

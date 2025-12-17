@@ -1,21 +1,8 @@
-import { lotteries } from "@/mockdata";
 import { Header } from "@/components/header";
 import { LotteryCard } from "@/components/LotteryCard";
+import prisma from "@/lib/prisma";
 
-export default function Lotteries() {
-  async function copyText() {
-    const textElement = document.getElementById("textToCopy");
-    const text = textElement.innerText; // Or textElement.value for input/textarea
-
-    try {
-      await navigator.clipboard.writeText(text);
-      document.getElementById("message").innerText = "Text copied to clipboard!";
-    } catch (err) {
-      console.error("Failed to copy text: ", err);
-      document.getElementById("message").innerText = "Failed to copy text.";
-    }
-  }
-
+export default function Lotteries({ lotteries }) {
   return (
     <div className="min-h-screen bg-background">
       <header className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-10 px-6">
@@ -33,4 +20,20 @@ export default function Lotteries() {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const lotteries = await prisma.lottery.findMany();
+
+  // Serialize dates to strings (JSON)
+  const serializedLotteries = lotteries.map((lottery) => ({
+    ...lottery,
+    drawDate: lottery.drawDate.toISOString(),
+  }));
+
+  return {
+    props: {
+      lotteries: serializedLotteries,
+    },
+  };
 }
