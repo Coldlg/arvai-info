@@ -104,15 +104,15 @@ export function LotteryCard({ lottery }) {
           <div className="text-md text-gray-300 whitespace-pre-line">{lottery.description}</div>
           {lottery.accountNumber && (
             <div className="mt-2 text-gray-300">
-              ❌ Данс:{" "}
+              ✅ Данс:{" "}
               <span className="cursor-pointer underline text-blue-400" onClick={() => copyText(lottery.accountNumber)}>
                 {lottery.accountNumber}
               </span>
               <br />
               {lottery.bankName && lottery.accountName && `(${lottery.bankName} ${lottery.accountName})`}
-              <br />❌ Нэг сугалааны эрх{" "}
+              <br />✅ Нэг сугалааны эрх{" "}
               <span className="font-semibold text-green-600">{lottery.price.toLocaleString()}₮</span>
-              <br />❌ Гүйлгээний утга: Утасны дугаар
+              <br />✅ Гүйлгээний утга: Утасны дугаар
             </div>
           )}
         </div>
