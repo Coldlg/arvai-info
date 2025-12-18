@@ -6,6 +6,7 @@ const ALLOWED_IPS = [
   "::1", // localhost IPv6 (for development)
   "127.0.0.1", // localhost IPv4 (for development)
   "192.168.1.69",
+  "66.181.184.231",
   // Add your production IPs here:
   // '123.45.67.89',  // Your office IP
   // '98.76.54.32',   // Your home IP
@@ -14,7 +15,7 @@ const ALLOWED_IPS = [
 // Set to true to skip IP check (useful during development)
 const SKIP_IP_CHECK = process.env.NODE_ENV === "development";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Only apply to admin routes (both pages and API)
   if (request.nextUrl.pathname.startsWith("/admin") || request.nextUrl.pathname.startsWith("/api/admin")) {
     // Skip login page from middleware check
