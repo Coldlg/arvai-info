@@ -39,14 +39,14 @@ export function middleware(request: NextRequest) {
 
       // For API routes, return JSON error
       if (request.nextUrl.pathname.startsWith("/api/admin")) {
-        return new NextResponse(JSON.stringify({ error: "page not found" }), {
-          status: 404,
+        return new NextResponse(JSON.stringify({ error: "Access Denied - IP Not Allowed" }), {
+          status: 403,
           headers: { "Content-Type": "application/json" },
         });
       }
 
       // For pages, show error page
-      return new NextResponse("Page not found", { status: 404 });
+      return new NextResponse("Access Denied - IP Not Allowed", { status: 403 });
     }
 
     // Second check: Authentication cookie
