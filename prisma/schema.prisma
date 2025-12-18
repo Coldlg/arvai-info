@@ -25,6 +25,7 @@ model Lottery {
   accountNumber   String?
   accountName     String?
   bankName        String?
+  isHidden        Boolean  @default(false)
   tickets         Ticket[]
 }
 

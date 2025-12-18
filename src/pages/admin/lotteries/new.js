@@ -16,10 +16,12 @@ export default function NewLottery() {
     accountNumber: "",
     accountName: "",
     bankName: "",
+    isHidden: false,
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
 
   const handleSubmit = async (e) => {
@@ -142,6 +144,20 @@ export default function NewLottery() {
                 className="w-full bg-black/30 border border-tertiary/50 rounded-lg px-4 py-3 text-text-main focus:outline-none focus:border-tertiary resize-none font-mono text-sm"
                 placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
               />
+            </div>
+
+            <div className="flex items-center gap-2 pt-2">
+              <input
+                type="checkbox"
+                name="isHidden"
+                id="isHidden"
+                checked={form.isHidden}
+                onChange={handleChange}
+                className="w-5 h-5 accent-accent bg-black/30 border border-tertiary/50 rounded"
+              />
+              <label htmlFor="isHidden" className="text-text-main font-medium cursor-pointer">
+                Нийтээс нуух (Hidden)
+              </label>
             </div>
           </div>
 

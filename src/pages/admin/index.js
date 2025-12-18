@@ -23,6 +23,25 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleToggleVisibility = async (id, currentHidden) => {
+    try {
+      const lottery = lotteries.find((l) => l.id === id);
+      const res = await fetch(`/api/admin/lotteries/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...lottery,
+          isHidden: !currentHidden,
+        }),
+      });
+      if (res.ok) {
+        setLotteries(lotteries.map((l) => (l.id === id ? { ...l, isHidden: !currentHidden } : l)));
+      }
+    } catch (error) {
+      console.error("Error toggling visibility:", error);
+    }
+  };
+
   const handleDelete = async (id) => {
     if (!confirm("Энэ сугалааг устгах уу? Бүх тасалбарууд устах болно!")) return;
 
@@ -115,21 +134,34 @@ export default function AdminDashboard() {
                     <th className="px-6 py-4 font-medium">Үнэ</th>
                     <th className="px-6 py-4 font-medium">Тасалбар</th>
                     <th className="px-6 py-4 font-medium">Дуусах огноо</th>
+                    <th className="px-6 py-4 font-medium text-center">Төлөв</th>
                     <th className="px-6 py-4 font-medium">Үйлдэл</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-tertiary/20">
                   {lotteries.map((lottery) => (
                     <tr key={lottery.id} className="hover:bg-white/5 transition-colors">
-                      <td className="px-6 py-4 text-gray-400">#{lottery.id}</td>
+                      <td className="px-6 py-4 text-text-main">#{lottery.id}</td>
                       <td className="px-6 py-4 text-text-main font-medium">{lottery.title}</td>
                       <td className="px-6 py-4 text-accent font-semibold">{lottery.price.toLocaleString()}₮</td>
                       <td className="px-6 py-4">
-                        <span className="text-text-main">{lottery.ticketsSold}</span>
-                        <span className="text-gray-500">/{lottery.maximumTickets}</span>
+                        <span className="text-text-main/50">{lottery.ticketsSold}</span>
+                        <span className="text-text-main">/{lottery.maximumTickets}</span>
                       </td>
-                      <td className="px-6 py-4 text-gray-400">
+                      <td className="px-6 py-4 text-text-main">
                         {new Date(lottery.drawDate).toLocaleDateString("mn-MN")}
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <button
+                          onClick={() => handleToggleVisibility(lottery.id, lottery.isHidden)}
+                          className={`text-xs font-bold px-2 py-1 rounded-full border ${
+                            lottery.isHidden
+                              ? "bg-red-500/10 text-red-400 border-red-500/30 hover:bg-red-500/20"
+                              : "bg-green-500/10 text-green-400 border-green-500/30 hover:bg-green-500/20"
+                          } transition-colors`}
+                        >
+                          {lottery.isHidden ? "Нуусан" : "Ил"}
+                        </button>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">

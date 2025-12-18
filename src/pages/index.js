@@ -23,7 +23,9 @@ export default function Home({ lotteries }) {
 }
 
 export async function getStaticProps() {
-  const lotteries = await prisma.lottery.findMany();
+  const lotteries = await prisma.lottery.findMany({
+    where: { isHidden: false },
+  });
 
   const now = new Date();
 

@@ -43,6 +43,7 @@ export default async function handler(req, res) {
           accountNumber: accountNumber || null,
           accountName: accountName || null,
           bankName: bankName || null,
+          isHidden: req.body.isHidden === true,
         },
       });
 
