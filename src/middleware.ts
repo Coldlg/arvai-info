@@ -5,6 +5,7 @@ import type { NextRequest } from "next/server";
 const ALLOWED_IPS = [
   "::1", // localhost IPv6 (for development)
   "127.0.0.1", // localhost IPv4 (for development)
+  process.env.ADMIN_IP,
   // Add your production IPs here:
   // '123.45.67.89',  // Your office IP
   // '98.76.54.32',   // Your home IP
