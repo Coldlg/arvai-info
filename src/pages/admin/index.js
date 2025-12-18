@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function AdminDashboard() {
+  const router = useRouter();
   const [lotteries, setLotteries] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,6 +36,15 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      router.push("/admin/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -48,6 +59,12 @@ export default function AdminDashboard() {
             </Link>
             <h1 className="text-2xl font-bold">🛠️ Админ Панел</h1>
           </div>
+          <button
+            onClick={handleLogout}
+            className="text-red-400 bg-red-500/20 hover:bg-red-500/30 hover:text-red-300 px-4 py-2 rounded-lg font-semibold transition-colors"
+          >
+            🚪 Гарах
+          </button>
         </div>
       </header>
 
