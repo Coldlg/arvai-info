@@ -25,6 +25,7 @@ model Lottery {
   accountNumber   String?
   accountName     String?
   bankName        String?
+  tickets         Ticket[]
 }
 
 model Car {
@@ -40,4 +41,19 @@ model Car {
   rating         Float
   description    String
   images         String[]
+}
+
+model Ticket {
+  id             Int       @id @default(autoincrement())
+  lottery_id     Int
+  ticket_number  Int
+  phone_number   String
+  amount_paid    Decimal   @db.Decimal(10, 2)
+  is_winner      Boolean   @default(false)
+  created_at     DateTime  @default(now())
+  
+  lottery        Lottery @relation(fields: [lottery_id], references: [id], onDelete: Cascade)
+  
+  @@unique([lottery_id, ticket_number])
+  @@index([lottery_id])
 }

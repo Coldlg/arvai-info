@@ -1,45 +1,40 @@
-import { useRouter } from "next/router";
+import { Header } from "@/components/header";
+import { LotteryCard } from "@/components/LotteryCard";
+import prisma from "@/lib/prisma";
 
-export default function Home() {
-  const router = useRouter();
-
+export default function Home({ lotteries }) {
   return (
     <div className="min-h-screen bg-background">
-      <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-blue-600/20 via-transparent to-purple-600/20" />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-            Арвай Авто худалдаа
-          </h1>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-            <button
-              onClick={() => router.push("/lotteries")}
-              className="inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 font-semibold transition-colors w-full sm:w-auto"
-            >
-              Сугалаа үзэх
-            </button>
-            <button
-              onClick={() => router.push("/cars")}
-              className="inline-flex items-center justify-center rounded-lg border border-foreground/20 hover:border-foreground/40 px-6 py-3 font-semibold transition-colors w-full sm:w-auto"
-            >
-              Машин үзэх
-            </button>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-            <div className="rounded-xl border border-foreground/10 p-5 bg-white/60 dark:bg-black/30 backdrop-blur">
-              <h3 className="font-bold mb-1">
-                Баталгаатай тээврийн хэрэгслүүд
-              </h3>
-              <p className="text-sm opacity-75">
-                бодит үнэ, тодорхой мэдээлэл.
-              </p>
-            </div>
-          </div>
+      <header className="bg-gradient-to-r from-secondary to-primary text-text-main py-10 px-6">
+        <Header />
+      </header>
+      <main className="max-w-7xl mx-auto py-8 px-6 ">
+        {/* <h2 className="text-3xl font-bold mb-8 text-foreground">
+          Available Lotteries
+        </h2> */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {lotteries.map((lottery) => (
+            <LotteryCard key={lottery.id} lottery={lottery} />
+          ))}
         </div>
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const lotteries = await prisma.lottery.findMany();
+
+  // Serialize dates to strings (JSON)
+  const serializedLotteries = lotteries.map((lottery) => ({
+    ...lottery,
+    drawDate: lottery.drawDate.toISOString(),
+  }));
+
+  return {
+    props: {
+      lotteries: serializedLotteries,
+    },
+    revalidate: 10,
+  };
 }
