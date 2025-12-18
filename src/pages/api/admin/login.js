@@ -1,7 +1,7 @@
 import { serialize } from "cookie";
 
 // Store this in your .env file as: ADMIN_PASSWORD=your_secure_password
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Rate limiting: simple in-memory store
 const loginAttempts = new Map();
