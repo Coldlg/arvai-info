@@ -250,12 +250,12 @@ export function LotteryCard({ lottery }) {
 
         {/* Action Buttons */}
         <div className="space-y-3 pt-2">
-          <button
+          {/* <button
             onClick={() => window.open("https://tinyurl.com/aa6k8yb4")}
             className="w-full bg-gradient-to-r from-tertiary to-accent hover:from-accent hover:to-tertiary text-white py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-accent/25 text-base font-bold tracking-wide active:scale-[0.98]"
           >
             ⭐ ОДОО ОРОЛЦОХ ⭐
-          </button>
+          </button> */}
           <button
             onClick={() => (window.location.href = `/lottery/${lottery.id}`)}
             className="w-full bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-text-main border border-tertiary/50 py-3 px-4 rounded-xl transition-all shadow-md hover:shadow-tertiary/20 text-base font-semibold tracking-wide active:scale-[0.98]"

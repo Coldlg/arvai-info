@@ -2,16 +2,16 @@
 // Run this with: tsx scripts/importFromGoogleSheets.ts
 
 import "dotenv/config";
-import { PrismaClient } from "./src/generated/prisma";
+import { PrismaClient } from "../src/generated/prisma";
 
 const prisma = new PrismaClient({
   accelerateUrl: process.env.DATABASE_URL,
 });
 
 // Configuration
-const LOTTERY_ID = 4; // LC300 lottery
-const SHEET_ID = "1zX5F4uMnYUU1xIhjd180OHIgqmmZ-61p3WVfl7Kpb9Q";
-const SHEET_NAME = "Land-300"; // Update this to match your sheet tab name
+const LOTTERY_ID = 6; // LC300 lottery
+const SHEET_ID = "10f8ypL1HkxF7kVOzQaKieue_x7iSzeX3Q5G77awRmDQ";
+const SHEET_NAME = "Sheet1"; // Update this to match your sheet tab name
 const DEFAULT_TICKET_PRICE = 25000; // LC300 ticket price
 
 async function importFromGoogleSheets() {

@@ -25,11 +25,32 @@ export default function Home({ lotteries }) {
 export async function getStaticProps() {
   const lotteries = await prisma.lottery.findMany();
 
+  const now = new Date();
+
   // Serialize dates to strings (JSON)
   const serializedLotteries = lotteries.map((lottery) => ({
     ...lottery,
     drawDate: lottery.drawDate.toISOString(),
   }));
+
+  // Sort lotteries: active ones first (by drawDate ascending), expired ones last
+  serializedLotteries.sort((a, b) => {
+    const aExpired = new Date(a.drawDate) <= now;
+    const bExpired = new Date(b.drawDate) <= now;
+
+    // If one is expired and one is not, expired goes last
+    if (aExpired && !bExpired) return 1;
+    if (!aExpired && bExpired) return -1;
+
+    // If both are same status, sort by drawDate (sooner first for active, recent first for expired)
+    if (aExpired) {
+      // Both expired: most recently expired first
+      return new Date(b.drawDate) - new Date(a.drawDate);
+    } else {
+      // Both active: soonest deadline first
+      return new Date(a.drawDate) - new Date(b.drawDate);
+    }
+  });
 
   return {
     props: {
