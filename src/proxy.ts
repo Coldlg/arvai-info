@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Add your IP addresses here
-const ALLOWED_IPS = [
-  "::1", // localhost IPv6 (for development)
-  "127.0.0.1", // localhost IPv4 (for development)
-  "192.168.1.69",
-  "66.181.184.231",
-  // Add your production IPs here:
-  // '123.45.67.89',  // Your office IP
-  // '98.76.54.32',   // Your home IP
-];
+// Add your IP addresses in .env as: ALLOWED_IPS=::1,127.0.0.1,your-ip-here
+const ALLOWED_IPS = (process.env.ALLOWED_IPS || "::1,127.0.0.1")
+  .split(",")
+  .map((ip) => ip.trim())
+  .filter(Boolean);
 
 // Set to true to skip IP check (useful during development)
 const SKIP_IP_CHECK = process.env.NODE_ENV === "development";
